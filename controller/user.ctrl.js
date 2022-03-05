@@ -1,9 +1,11 @@
 const userrepository =require('../repositories/user.repository');
+const cryptoutils =require('../utils/cryptoutils')
 
 
 const register =async(req,res)=>{
     try{
         const data =req.body
+        data.password = await cryptoutils.gethash(data.password)
         await userrepository.add(data)
         res.status(201)
         res.send()
@@ -70,4 +72,20 @@ const getuserbyemail =async(req,res)=>{
     .then(user=>res.status(203).json(user))
     .catch(err=>res.status(400).send('intenal server error'))
 }
-module.exports={register,updateuser,getusers,getuserbyemail}
+
+const signin =async(req,res)=>{
+    const payload =req.body
+    const dbuser = await userrepository.getpassword(payload.email)
+    const result =await cryptoutils.compare(payload.password,dbuser.password)
+    const token  =cryptoutils.gettoken(dbusers)
+
+    if(result){
+        res.status(203)
+        res.json(token)
+    }else{
+        res.satus(402)
+        res.send('unauthorised')
+    }
+
+}
+module.exports={register,updateuser,getusers,getuserbyemail,signin}
