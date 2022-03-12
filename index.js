@@ -7,10 +7,10 @@ const cors =require('cors')
 const defaultrouter=require('./routes/default.route')
 const userrouter =require('./routes/user.router')
 
-const port =3000;
+const port =process.env.PORT || 3000;
 
 app.listen(port,()=>{
-    console.log(`server is running on port ${3000}`)
+    console.log(`server is running on port ${port}`)
 })
 app.use(bodyparser.json())
 app.use(cors())
