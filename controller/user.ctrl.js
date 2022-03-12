@@ -20,7 +20,7 @@ const register =async(req,res)=>{
         }else{
             console.log(e)
             res.status(500)
-            res.send('internal  server error')
+            res.send('internal server error')
         }
     }
 }
