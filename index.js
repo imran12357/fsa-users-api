@@ -3,6 +3,7 @@ const mongoose =require('mongoose')
 const bodyparser = require('body-parser')
 const config =require('./configs/index')
 const app =express();
+const cors =require('cors')
 const defaultrouter=require('./routes/default.route')
 const userrouter =require('./routes/user.router')
 
@@ -12,8 +13,7 @@ app.listen(port,()=>{
     console.log(`server is running on port ${3000}`)
 })
 app.use(bodyparser.json())
-
-
+app.use(cors())
 
 
 mongoose.connect(config.dbconstr)

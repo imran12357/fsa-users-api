@@ -11,7 +11,7 @@ const register =async(req,res)=>{
         res.send()
 
     }catch(e){
-        if(e._message ==="product validation failed"){
+        if(e._message ==="user validation failed"){
             res.status(401);
             res.send(e.errors)
         }else if(e.message.indexOf('duplicate key error collection')>-1){
@@ -77,7 +77,7 @@ const signin =async(req,res)=>{
     const payload =req.body
     const dbuser = await userrepository.getpassword(payload.email)
     const result =await cryptoutils.compare(payload.password,dbuser.password)
-    const token  =cryptoutils.gettoken(dbusers)
+    const token  =cryptoutils.gettoken(dbuser)
 
     if(result){
         res.status(203)
