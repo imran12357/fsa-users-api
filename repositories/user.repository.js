@@ -21,7 +21,7 @@ const updateuser =(email,data)=>{
     })
 }
 const Getusers =(pageindex,pagesize,options)=>{
-    const {name,degree,qualification,skills}=options
+    const {name,degree, qualification,skills}=options
     const projection ={__v:0,_id:0,password:0}
     const filter ={
            
