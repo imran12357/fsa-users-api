@@ -1,5 +1,5 @@
 const config ={
-    dbconstr :'mongodb+srv://imran12357:8801965509@cluster0.ze5ov.mongodb.net/test'
+    dbconstr :'mongodb+srv://admin:admin12357@cluster0.ze5ov.mongodb.net/test'
 }
 
 module.exports =config
