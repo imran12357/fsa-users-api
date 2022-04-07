@@ -79,7 +79,7 @@ const signin =async(req,res)=>{
     const result =await cryptoutils.compare(payload.password,dbuser.password)
     const token  =cryptoutils.gettoken(dbuser)
     const response ={
-        firstName :buser.firstName,
+        firstName :dbuser.firstName,
         lastName :dbuser.lastName,
         email :dbuser.email,
         token
