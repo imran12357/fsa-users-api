@@ -12,6 +12,6 @@ const compare =(pwd,hashpwd)=>{
 }
 
 const gettoken =(user)=>{
-    return jwt.sign({email:user.email},'secret',{expiresIn: '10m'})
+    return jwt.sign({email:user.email,firstName:user.firstName,lastName:user.lastName},'secret',{expiresIn: '10m'})
 }
 module.exports = {gethash,compare,gettoken}
