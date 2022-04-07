@@ -78,10 +78,16 @@ const signin =async(req,res)=>{
     const dbuser = await userrepository.getpassword(payload.email)
     const result =await cryptoutils.compare(payload.password,dbuser.password)
     const token  =cryptoutils.gettoken(dbuser)
+    const response ={
+        firstName :buser.firstName,
+        lastName :dbuser.lastName,
+        email :dbuser.email,
+        token
+    }
 
     if(result){
         res.status(203)
-        res.json(token)
+        res.json(response)
     }else{
         res.satus(402)
         res.send('unauthorised')
