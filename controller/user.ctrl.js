@@ -76,22 +76,27 @@ const getuserbyemail =async(req,res)=>{
 const signin =async(req,res)=>{
     const payload =req.body
     const dbuser = await userrepository.getpassword(payload.email)
-    const result =await cryptoutils.compare(payload.password,dbuser.password)
-    const token  =cryptoutils.gettoken(dbuser)
-    const response ={
-        firstName :dbuser.firstName,
-        lastName :dbuser.lastName,
-        email :dbuser.email,
-        token
-    }
-
-    if(result){
-        res.status(203)
-        res.json(response)
+    if(!dbuser){
+        res.status(402)
+        res.send('user not found')
     }else{
-        res.satus(402)
-        res.send('unauthorised')
-    }
+        const result =await cryptoutils.compare(payload.password,dbuser.password)
+        const token  =cryptoutils.gettoken(dbuser)
+        const response ={
+            firstName :dbuser.firstName,
+            lastName :dbuser.lastName,
+            email :dbuser.email,
+            token
+        }
+        
+        if(result){
+            res.status(203)
+            res.json(response)
+        }else{
+            res.status(402)
+            res.send('incorrect username or password')
+        }
 
+    }
 }
-module.exports={register,updateuser,getusers,getuserbyemail,signin}
+    module.exports={register,updateuser,getusers,getuserbyemail,signin}
