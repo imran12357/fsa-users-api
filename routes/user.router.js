@@ -5,10 +5,10 @@ const tokenauth =require('../middlewares/tokenauth')
 
 router.post('/signup',userctrl.register)
 router.post('/signin',userctrl.signin)
-router.get('/page/:page/size/:size',userctrl.getusers)
-router.get('/',userctrl.getusers)
-router.put('/:email',userctrl.updateuser)
-router.get('/:email',userctrl.getuserbyemail)
+router.get('/page/:page/size/:size',tokenauth,userctrl.getusers)
+router.get('/',tokenauth,userctrl.getusers)
+router.put('/:email',tokenauth,userctrl.updateuser)
+router.get('/:email',tokenauth,userctrl.getuserbyemail)
 
 
 module.exports =router
